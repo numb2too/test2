@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content = "width=device-width">
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="price" >
+        <input type="checkbox" v-on:change="test($event);">
+        <div id="myShow" v-if="isShow">aaaa</div>
+        <li>日幣：{{price*0.25}}</li>
+        <li>日幣：{{price*30}}</li>  
+        <hr>
+        A體脂肪: <input type="text" v-model="a">
+        <br>
+        B體脂肪: <input type="text" v-model="b">
+        <ul> 
+            <li>
+                誰的體脂肪比較重：{{whoHeavey}}
+            </li>
+        </ul>
+        <br>
+        <template v-for="branch in branches">
+            <input type="radio"
+            :value="branch">{{branch}}
+        </template>
+    </div>
+    <script src="https://vuejs.org/js/vue.js"></script>
+    <script>        
+        Vue.config.devtools = true
+        var app = new Vue({
+            el:'#app',
+            data:{
+                toDos:'',
+                newToDo:'',
+                price:100,
+                branches:['aa','bb'],
+                isShow:false,
+                a:0,
+                b:0
+
+            }  ,
+            methods: {
+                addToDo:function(){
+
+                },
+                test:function( event){
+                    console.log(event.target.checked  );
+                    this.isShow=event.target.checked ;
+                }
+            }  ,
+            computed:{
+                whoHeavey:function(){
+                    var a= this.a;
+                    var b = this.b;
+                    if( a>b){
+                        return 'A比較重';
+                    }else if( a<b){
+                        return 'B比較重';
+                    }else{
+                        return '一樣重';
+                    }
+                }
+            }     
+        })
+
+    </script>
+</body>
+</html>
+
